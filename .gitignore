@@ -1,6 +1,4 @@
-# Node.js dependencies & builds
 node_modules/
-dist/
 build/
 .npm
 *.log
