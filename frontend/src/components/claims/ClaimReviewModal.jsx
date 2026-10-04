@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { claimService } from '../../services/claimService';
 import { useNotifications } from '../../context/NotificationContext';
-import { formatDate } from '../../utils/formatters';
+import { formatDate, getImageUrl } from '../../utils/formatters';
 
 export const ClaimReviewModal = ({ claim, isOpen, onClose, onSuccess }) => {
   const { showToast } = useNotifications();
@@ -178,7 +178,7 @@ export const ClaimReviewModal = ({ claim, isOpen, onClose, onSuccess }) => {
                 <div className="pt-2">
                   <span className="text-[11px] font-bold text-slate-600 block mb-1">Attached Proof Document:</span>
                   <a
-                    href={claim.proofImage.startsWith('/') ? claim.proofImage : `/${claim.proofImage}`}
+                    href={getImageUrl(claim.proofImage)}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 hover:text-indigo-800 bg-white px-3 py-1.5 rounded-lg border border-indigo-200"

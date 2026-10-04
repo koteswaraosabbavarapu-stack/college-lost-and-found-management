@@ -18,7 +18,7 @@ import { useAuth } from '../context/AuthContext';
 import { StatusBadge } from '../components/common/StatusBadge';
 import { LoadingSpinner } from '../components/common/LoadingSpinner';
 import { EmptyState } from '../components/common/EmptyState';
-import { formatDate } from '../utils/formatters';
+import { formatDate, getImageUrl } from '../utils/formatters';
 
 export const UserDashboard = () => {
   const { user } = useAuth();
@@ -201,7 +201,7 @@ export const UserDashboard = () => {
                           <div className="w-14 h-14 rounded-2xl bg-rose-50 flex items-center justify-center text-rose-600 shrink-0 overflow-hidden border border-rose-100">
                             {item.imageUrl ? (
                               <img
-                                src={item.imageUrl.startsWith('/') ? item.imageUrl : `/${item.imageUrl}`}
+                                src={getImageUrl(item.imageUrl)}
                                 alt={item.title}
                                 className="w-full h-full object-cover"
                               />
@@ -256,7 +256,7 @@ export const UserDashboard = () => {
                           <div className="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 shrink-0 overflow-hidden border border-emerald-100">
                             {item.imageUrl ? (
                               <img
-                                src={item.imageUrl.startsWith('/') ? item.imageUrl : `/${item.imageUrl}`}
+                                src={getImageUrl(item.imageUrl)}
                                 alt={item.title}
                                 className="w-full h-full object-cover"
                               />

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Calendar, Tag, Sparkles, ShieldCheck, ChevronRight } from 'lucide-react';
 import { StatusBadge } from '../common/StatusBadge';
-import { formatDate } from '../../utils/formatters';
+import { formatDate, getImageUrl } from '../../utils/formatters';
 
 export const ItemCard = ({ item, matchScore }) => {
   const isFound = item.type === 'FOUND';
@@ -14,7 +14,7 @@ export const ItemCard = ({ item, matchScore }) => {
         <div className="relative w-full h-44 bg-slate-100 overflow-hidden flex items-center justify-center">
           {item.imageUrl ? (
             <img
-              src={item.imageUrl.startsWith('/') ? item.imageUrl : `/${item.imageUrl}`}
+              src={getImageUrl(item.imageUrl)}
               alt={item.title}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />

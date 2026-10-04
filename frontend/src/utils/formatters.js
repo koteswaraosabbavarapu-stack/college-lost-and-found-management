@@ -41,3 +41,17 @@ export const truncateText = (text, maxLength = 100) => {
   if (text.length <= maxLength) return text;
   return text.substring(0, maxLength).trim() + '...';
 };
+
+export const getImageUrl = (url) => {
+  if (!url) return '';
+  if (
+    url.startsWith('data:') ||
+    url.startsWith('blob:') ||
+    url.startsWith('http://') ||
+    url.startsWith('https://') ||
+    url.startsWith('/')
+  ) {
+    return url;
+  }
+  return `/${url}`;
+};

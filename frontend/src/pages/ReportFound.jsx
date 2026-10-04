@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, Upload, AlertCircle, Loader2, Check, Lock } from 'lucide-react';
+import { ShieldCheck, Upload, AlertCircle, Loader2, Check, Lock, X } from 'lucide-react';
 import { itemService } from '../services/itemService';
 import { uploadService } from '../services/uploadService';
 import { useNotifications } from '../context/NotificationContext';
+import { getImageUrl } from '../utils/formatters';
 
 const CATEGORIES = [
   'Electronics',
@@ -316,15 +317,24 @@ export const ReportFound = () => {
               </label>
 
               {formData.imageUrl ? (
-                <div className="flex items-center gap-2">
-                  <span className="text-xs text-emerald-600 font-bold flex items-center gap-1">
-                    <Check className="w-4 h-4" /> Image attached
-                  </span>
+                <div className="flex items-center gap-3 bg-white p-2 rounded-xl border border-slate-200">
                   <img
-                    src={formData.imageUrl.startsWith('/') ? formData.imageUrl : `/${formData.imageUrl}`}
+                    src={getImageUrl(formData.imageUrl)}
                     alt="Preview"
-                    className="w-10 h-10 object-cover rounded-lg border border-slate-200"
+                    className="w-12 h-12 object-cover rounded-lg border border-slate-200 shadow-xs"
                   />
+                  <div className="flex flex-col">
+                    <span className="text-xs text-emerald-600 font-bold flex items-center gap-1">
+                      <Check className="w-3.5 h-3.5" /> Photo attached
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setFormData((prev) => ({ ...prev, imageUrl: '' }))}
+                      className="text-[11px] text-rose-500 hover:text-rose-700 flex items-center gap-1 font-semibold mt-0.5"
+                    >
+                      <X className="w-3 h-3" /> Remove image
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <span className="text-xs text-slate-400">JPEG, PNG or WEBP up to 5MB</span>

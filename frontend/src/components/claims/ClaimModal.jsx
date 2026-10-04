@@ -3,6 +3,7 @@ import { ShieldCheck, Upload, AlertCircle, X, Check, Loader2 } from 'lucide-reac
 import { claimService } from '../../services/claimService';
 import { uploadService } from '../../services/uploadService';
 import { useNotifications } from '../../context/NotificationContext';
+import { getImageUrl } from '../../utils/formatters';
 
 export const ClaimModal = ({ item, isOpen, onClose, onSuccess }) => {
   const { showToast } = useNotifications();
@@ -172,7 +173,7 @@ export const ClaimModal = ({ item, isOpen, onClose, onSuccess }) => {
             <div className="flex items-center gap-3">
               <label className="flex items-center gap-2 px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold cursor-pointer transition">
                 <Upload className="w-4 h-4" />
-                <span>{uploadingImage ? 'Uploading...' : 'Attach Proof Image'}</span>
+                <span>{uploadingImage ? 'Processing...' : 'Attach Proof Image'}</span>
                 <input
                   type="file"
                   accept="image/*"
@@ -182,9 +183,23 @@ export const ClaimModal = ({ item, isOpen, onClose, onSuccess }) => {
                 />
               </label>
               {formData.proofImage && (
-                <span className="text-xs text-emerald-600 font-semibold flex items-center gap-1">
-                  <Check className="w-4 h-4" /> Proof attached
-                </span>
+                <div className="flex items-center gap-2 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200">
+                  <img
+                    src={getImageUrl(formData.proofImage)}
+                    alt="Proof Preview"
+                    className="w-8 h-8 object-cover rounded-md border border-emerald-300"
+                  />
+                  <span className="text-xs text-emerald-700 font-semibold flex items-center gap-1">
+                    <Check className="w-3.5 h-3.5 text-emerald-600" /> Attached
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setFormData((prev) => ({ ...prev, proofImage: '' }))}
+                    className="text-[11px] text-rose-500 hover:text-rose-700 ml-1"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </div>
               )}
             </div>
           </div>

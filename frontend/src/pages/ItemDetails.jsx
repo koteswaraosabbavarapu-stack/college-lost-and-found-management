@@ -22,7 +22,7 @@ import { StatusBadge } from '../components/common/StatusBadge';
 import { MatchScoreBadge } from '../components/common/MatchScoreBadge';
 import { ClaimModal } from '../components/claims/ClaimModal';
 import { LoadingSpinner } from '../components/common/LoadingSpinner';
-import { formatDate } from '../utils/formatters';
+import { formatDate, getImageUrl } from '../utils/formatters';
 
 export const ItemDetails = () => {
   const { id } = useParams();
@@ -108,7 +108,7 @@ export const ItemDetails = () => {
         <div className="lg:col-span-5 bg-slate-100 relative min-h-[320px] lg:min-h-full flex items-center justify-center p-6">
           {item.imageUrl ? (
             <img
-              src={item.imageUrl.startsWith('/') ? item.imageUrl : `/${item.imageUrl}`}
+              src={getImageUrl(item.imageUrl)}
               alt={item.title}
               className="w-full h-full max-h-96 object-contain rounded-2xl"
             />
