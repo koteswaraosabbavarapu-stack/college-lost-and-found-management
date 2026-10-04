@@ -33,10 +33,10 @@ api.interceptors.response.use(
       'An unexpected network error occurred';
     
     // Auto-logout if token is expired/invalid
-    if (error.response && error.response.status === 401 && !window.location.pathname.includes('/login')) {
+    if (error.response && error.response.status === 401 && !window.location.hash.includes('/login')) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      window.location.href = '/login?session=expired';
+      window.location.hash = '#/login?session=expired';
     }
 
     return Promise.reject(new Error(message));

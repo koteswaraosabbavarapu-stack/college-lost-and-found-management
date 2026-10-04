@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     authService.logout();
     setUser(null);
-    window.location.href = '/login';
+    window.location.hash = '#/login';
   };
 
   const updateProfile = async (profileData) => {
